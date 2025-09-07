@@ -148,7 +148,7 @@ async function proxy(req: NextRequest, urlObj: URL, reqInit: RequestInit): Promi
       // follow external redirect
       const next = safeUrl(loc)
       if (next) {
-        return proxy(next, { ...reqInit, redirect: 'follow' })
+        return proxy(req, next, { ...reqInit, redirect: 'follow' })
       }
     }
   }
