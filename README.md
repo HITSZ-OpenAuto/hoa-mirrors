@@ -1,4 +1,4 @@
-HITSZ OpenAuto Mirrors (Next.js App Router)
+HITSZ OpenAuto FastDL
 
 Overview
 - Proxy for GitHub raw/blob/releases/assets.

@@ -1,8 +1,8 @@
 {
-  "name": "hoa-mirrors",
+  "name": "hoa-fastdl",
   "version": "0.1.0",
   "private": true,
-  "description": "HITSZ OpenAuto Mirrors",
+  "description": "A lightweight GitHub proxy service for faster file downloads",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

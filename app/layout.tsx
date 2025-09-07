@@ -3,8 +3,8 @@ import React from 'react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'HITSZ OpenAuto Mirrors',
-  description: 'HITSZ OpenAuto Mirrors',
+  title: 'HITSZ OpenAuto 文件加速',
+  description: 'HITSZ OpenAuto 文件加速',
   robots: {
     index: false,
     follow: false,

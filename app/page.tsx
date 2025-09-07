@@ -62,7 +62,7 @@ export default function Page() {
     <div className="container">
       <main>
         <div className="card center">
-          <h1 className="title">HITSZ OpenAuto Mirrors</h1>
+          <h1 className="title">HITSZ OpenAuto 文件加速</h1>
           <form onSubmit={onSubmit} className="row">
             <div className="input-wrap">
               <input
