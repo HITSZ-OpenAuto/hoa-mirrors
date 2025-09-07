@@ -133,21 +133,29 @@ function pickAllowedOrigin(origin: string): string | '' {
   }
 }
 
-async function proxy(req: NextRequest, urlObj: URL, reqInit: RequestInit): Promise<Response> {
+async function proxy(
+  req: NextRequest,
+  urlObj: URL,
+  reqInit: RequestInit,
+  redirectCount: number = 0
+): Promise<Response> {
   const res = await fetch(urlObj.href, reqInit)
   const resHdrNew = new Headers(res.headers)
   const origin = req.headers.get('origin') || ''
   const allowOrigin = pickAllowedOrigin(origin)
 
-  if (resHdrNew.has('location')) {
-    const loc = resHdrNew.get('location') || ''
-    if (checkUrl(loc)) {
-      resHdrNew.set('location', PREFIX + loc)
-    } else {
-      // follow external redirect
+  if (res.status >= 300 && res.status <= 399 && resHdrNew.has('location')) {
+    if (redirectCount > 5) {
+      return new Response('Too many redirects', { status: 508 })
+    }
+    let loc = resHdrNew.get('location') || ''
+    try {
+      const nextUrl = new URL(loc, urlObj)
+      return proxy(req, nextUrl, { ...reqInit, redirect: 'manual' }, redirectCount + 1)
+    } catch {
       const next = safeUrl(loc)
       if (next) {
-        return proxy(req, next, { ...reqInit, redirect: 'follow' })
+        return proxy(req, next, { ...reqInit, redirect: 'manual' }, redirectCount + 1)
       }
     }
   }
